@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100b25">
+<title>ARCHIE SIN｜弓箭手基地</title>
+<style>
+:root{--bg:#0b0718;--panel:#17102d;--purple:#9d6cff;--blue:#58e7ff;--white:#f7f4ff;--muted:#c2b9da;--gold:#ffd782}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 80% 10%,#30205b 0%,transparent 35%),radial-gradient(ellipse at 10% 55%,#142447 0%,transparent 32%),var(--bg);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Microsoft JhengHei",sans-serif;line-height:1.6}
+a{color:inherit}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px clamp(18px,5vw,64px);border-bottom:1px solid #ffffff18;position:sticky;top:0;z-index:5;background:#0b0718dd;backdrop-filter:blur(14px)}
+.brand{font-weight:900;letter-spacing:2px}.brand span{color:var(--blue)}
+.tag{font-size:.75rem;color:var(--muted);letter-spacing:1px}
+.wrap{width:min(1080px,92%);margin:auto}
+.hero{min-height:570px;display:grid;place-items:center;text-align:center;padding:70px 16px 52px;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;width:270px;height:270px;border:1px solid #9d6cff55;border-radius:50%;pointer-events:none}
+.hero:before{left:-150px;top:70px;box-shadow:0 0 60px #9d6cff18}.hero:after{right:-170px;bottom:35px;width:340px;height:340px;border-color:#58e7ff40}
+.eyebrow{color:var(--blue);font-size:.82rem;font-weight:800;letter-spacing:4px;text-transform:uppercase}
+h1{font-size:clamp(3rem,10vw,7rem);line-height:.98;letter-spacing:-3px;margin:16px 0 10px;text-shadow:0 0 35px #9d6cff65}
+h1 small{display:block;font-size:clamp(1.1rem,3vw,2rem);letter-spacing:5px;color:var(--blue);margin-top:18px}
+.hero p{color:var(--muted);max-width:600px;margin:22px auto}
+.arrow-mark{font-size:3.1rem;display:inline-block;filter:drop-shadow(0 0 16px #58e7ff);margin-bottom:8px}
+.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 21px;border-radius:999px;text-decoration:none;font-weight:800;border:1px solid #ffffff32;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 25px #9d6cff45}
+.primary{background:linear-gradient(110deg,var(--purple),#6758ee);border:0;color:white}
+.secondary{background:#ffffff08}
+.section{padding:34px 0 60px}
+.section-title{text-align:center;margin-bottom:25px}
+.section-title h2{font-size:clamp(1.65rem,4vw,2.5rem);margin:0}
+.section-title p{color:var(--muted);margin:6px 0}
+.icon-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:740px;margin:0 auto}
+.icon-card{appearance:none;text-align:left;color:var(--white);background:linear-gradient(145deg,#21183c,#100d22);border:1px solid #a78bfa45;border-radius:24px;padding:24px 20px;cursor:pointer;min-height:180px;transition:.2s}
+.icon-card:hover,.icon-card.active{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 12px 35px #0005,0 0 20px #58e7ff14}
+.icon{width:62px;height:62px;display:grid;place-items:center;border-radius:19px;background:linear-gradient(145deg,#9d6cff35,#58e7ff18);border:1px solid #ffffff20;font-size:1.9rem;margin-bottom:14px}
+.icon-card strong{display:block;font-size:1.2rem}.icon-card span:last-child{display:block;color:var(--muted);font-size:.9rem;margin-top:4px}
+.content-panel{display:none;margin:22px auto 0;max-width:850px;background:#17102de8;border:1px solid #ffffff20;border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:0 20px 55px #0004}
+.content-panel.show{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.panel-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}.panel-head .icon{margin:0;flex-shrink:0}.panel-head h3{margin:0;font-size:1.45rem}.panel-head p{margin:2px 0;color:var(--muted);font-size:.9rem}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.info{padding:16px;border-radius:16px;background:#ffffff07;border:1px solid #ffffff12}.info b{display:block;color:var(--blue);font-size:.83rem;margin-bottom:5px}.info span{font-weight:650}
+.note{color:var(--muted);font-size:.88rem}
+.song-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.song{display:flex;align-items:center;gap:12px;text-decoration:none;background:#ffffff08;border:1px solid #ffffff14;border-radius:15px;padding:13px 14px;transition:.2s}
+.song:hover{background:#9d6cff1b;border-color:#9d6cffaa;transform:translateY(-2px)}
+.play{display:grid;place-items:center;width:37px;height:37px;flex-shrink:0;border-radius:50%;background:linear-gradient(140deg,var(--purple),#4b5fe7);font-size:.9rem}
+.song b{display:block}.song small{color:var(--muted)}
+.concert{position:relative;overflow:hidden;background:linear-gradient(135deg,#28174b,#121b3a 58%,#0e1022);border:1px solid #a78bfa75;border-radius:28px;padding:clamp(24px,5vw,48px);box-shadow:0 20px 65px #0004}
+.concert:after{content:"➶";position:absolute;right:16px;top:-28px;font-size:10rem;color:#ffffff08;transform:rotate(-20deg);pointer-events:none}
+.concert .sponsor{color:var(--gold);font-weight:800;letter-spacing:1px;font-size:.85rem}
+.concert h2{font-size:clamp(1.9rem,5.5vw,3.7rem);line-height:1.12;margin:12px 0}
+.concert h2 span{display:block;color:var(--blue);font-size:.55em;letter-spacing:3px;margin-top:12px}
+.concert .sub{color:var(--muted);margin:0 0 24px}
+.concert-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}
+.concert-cell{padding:16px;border-radius:16px;background:#08081766;border:1px solid #ffffff18}
+.concert-cell small{display:block;color:var(--muted);font-size:.78rem;margin-bottom:5px}.concert-cell b{font-size:1.02rem}
+.prices{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.price{border-radius:12px;padding:10px 15px;background:#ffffff0b;border:1px solid #ffffff20;font-weight:800}
+.price.vip{border-color:var(--gold);color:var(--gold);background:#ffd78212}
+.perk{padding:16px 18px;border-left:3px solid var(--gold);background:#ffd7820c;border-radius:0 14px 14px 0;margin:18px 0}
+.perk b{color:var(--gold)}
+.ticket-note{font-size:.82rem;color:var(--muted);margin-top:12px}
+.footer{text-align:center;border-top:1px solid #ffffff15;padding:28px 15px 36px;color:var(--muted);font-size:.85rem}
+.footer a{color:var(--blue);text-decoration:none}
+.pill{display:inline-block;font-size:.75rem;color:var(--blue);border:1px solid #58e7ff55;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+@media(max-width:600px){.hero{min-height:490px;padding-top:54px}.icon-grid{gap:10px}.icon-card{padding:18px 15px;min-height:164px}.icon{width:54px;height:54px}.info-grid,.song-list{grid-template-columns:1fr}.concert-grid{grid-template-columns:1fr}.topbar{padding:13px 16px}.tag{max-width:120px;text-align:right}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">ARCHIE <span>↗</span> SIN</div>
+  <div class="tag">ARCHER FAN BASE · HONG KONG</div>
+</header>
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="arrow-mark" aria-hidden="true">➶</div>
+    <div class="eyebrow">FOR EVERY ARCHER</div>
+    <h1>ARCHIE<span style="color:var(--purple)">TECT</span><small>冼 靖 峰 · ARCHIE SIN</small></h1>
+    <p>一支箭，射向心動的方向。<br>用音樂連結每一位弓箭手，12月一起走進 Archie 的音樂世界。</p>
+    <div class="actions">
+      <a class="btn primary" href="#concert">✦ 直擊演唱會</a>
+      <a class="btn secondary" href="https://www.instagram.com/archie_sin/" target="_blank" rel="noopener">◎ 追蹤 Instagram</a>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" id="explore">
+  <div class="section-title">
+    <div class="pill">CHOOSE YOUR DESTINATION</div>
+    <h2>探索 Archie 的音樂宇宙</h2>
+    <p>點擊以下 Icon，開啟你想了解的內容。</p>
+  </div>
+  <div class="icon-grid">
+    <button class="icon-card active" type="button" data-panel="profile" aria-expanded="true">
+      <span class="icon">🏹</span><strong>個人資料</strong><span>認識冼靖峰 Archie Sin</span>
+    </button>
+    <button class="icon-card" type="button" data-panel="playlist" aria-expanded="false">
+      <span class="icon">🎧</span><strong>個人歌單</strong><span>點歌名前往 YouTube 搜尋</span>
+    </button>
+  </div>
+
+  <div class="content-panel show" id="profile">
+    <div class="panel-head"><span class="icon">🏹</span><div><h3>關於 Archie</h3><p>MEET THE ARTIST</p></div></div>
+    <div class="info-grid">
+      <div class="info"><b>中文姓名</b><span>冼靖峰</span></div>
+      <div class="info"><b>英文姓名</b><span>Archie Sin</span></div>
+      <div class="info"><b>出生日期</b><span>1998 年 5 月 15 日</span></div>
+      <div class="info"><b>身份</b><span>香港歌手、演員</span></div>
+      <div class="info"><b>音樂風格</b><span>粵語流行音樂、華語流行音樂</span></div>
+      <div class="info"><b>音樂旅程</b><span>《聲夢傳奇》後展開個人音樂發展</span></div>
+    </div>
+    <p class="note">網站以公開藝人資料作簡介；資料如有更新，請以藝人官方平台公布為準。</p>
+    <div class="actions" style="justify-content:flex-start">
+      <a class="btn secondary" href="https://www.instagram.com/archie_sin/" target="_blank" rel="noopener">◎ Instagram @archie_sin</a>
+    </div>
+  </div>
+
+  <div class="content-panel" id="playlist">
+    <div class="panel-head"><span class="icon">🎧</span><div><h3>Archie 個人歌單</h3><p>點擊歌曲，即可在 YouTube 搜尋相關歌曲。</p></div></div>
+    <div class="song-list">
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+%E4%B8%80%E5%80%8B%E4%BA%BA%E7%9A%84%E5%B9%B8%E9%81%8B"><span class="play">▶</span><span><b>一個人的幸運</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+Bug+Fix"><span class="play">▶</span><span><b>Bug Fix</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+%E7%84%A1%E6%84%8F%E5%86%92%E7%8A%AF"><span class="play">▶</span><span><b>無意冒犯</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+%E5%8B%87%E6%B0%A3"><span class="play">▶</span><span><b>勇氣</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+%E7%94%B1%E5%A4%A9%E5%8F%B0%E8%A8%98%E8%BC%89"><span class="play">▶</span><span><b>由天台記載</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+%E6%9C%AC%E5%B0%8A%E4%B8%8D%E6%98%AF%E6%88%91"><span class="play">▶</span><span><b>本尊不是我</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+%E6%98%AF%E6%97%A5%E9%81%8B%E6%B0%A3"><span class="play">▶</span><span><b>是日運氣</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+%E5%A6%82%E6%9E%9C%E5%8F%AA%E6%9C%89%E9%80%99%E4%B8%80%E7%9E%AC%E9%96%93"><span class="play">▶</span><span><b>如果只有這一瞬間</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+%E7%AA%A9%E5%BF%83%E7%9A%84%E5%91%B3%E9%81%93"><span class="play">▶</span><span><b>窩心的味道</b><small>Archie Sin · YouTube</small></span></a>
+      <a class="song" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=%E5%86%BC%E9%9D%96%E5%B3%B0+Surfive+Popstar"><span class="play">▶</span><span><b>Surfive Popstar</b><small>Archie Sin · YouTube</small></span></a>
+    </div>
+    <p class="note">歌曲連結使用 YouTube 搜尋頁，方便在不同地區尋找可播放的版本；不代表每首歌均有官方 MV。</p>
+  </div>
+</section>
+
+<section class="section wrap" id="concert">
+  <div class="concert">
+    <div class="sponsor">海馬牌床褥呈獻</div>
+    <h2>冼靖峰<br>ARCHIETECT <span>LIVE IN HONG KONG</span></h2>
+    <p class="sub">THE NIGHT WE SING TOGETHER · 2026</p>
+    <div class="concert-grid">
+      <div class="concert-cell"><small>📅 演出日期</small><b>2026 年 12 月 6 日<br>星期日</b></div>
+      <div class="concert-cell"><small>🕗 演出時間</small><b>晚上 8:15 PM</b></div>
+      <div class="concert-cell"><small>📍 演出地點</small><b>麥花臣場館</b></div>
+    </div>
+    <div style="font-weight:800">門票票價</div>
+    <div class="prices">
+      <span class="price vip">✦ VIP HK$1,280</span>
+      <span class="price">HK$880</span>
+      <span class="price">HK$580</span>
+    </div>
+    <div class="perk"><b>✦ VIP 專屬福利</b><br>觀看綵排 ＋ 1 對 1 合照</div>
+    <div class="actions" style="justify-content:flex-start">
+      <a class="btn primary" href="https://www.cityline.com/" target="_blank" rel="noopener">🎟 前往 Cityline 購票</a>
+      <a class="btn secondary" href="https://www.instagram.com/archie_sin/" target="_blank" rel="noopener">◎ 關注 Archie 最新消息</a>
+    </div>
+    <p class="ticket-note">公開發售日期：2026 年 10 月 30 日。購票前請到 Cityline 搜尋演唱會名稱，並以主辦方及售票平台最新公布的場次、票價、福利與購票安排為準。</p>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div style="font-weight:900;letter-spacing:2px;color:var(--white);margin-bottom:6px">ARCHER FAN BASE ↗</div>
+  <div>為音樂而聚，為 Archie 而來。</div>
+  <div style="margin-top:10px"><a href="https://www.instagram.com/archie_sin/" target="_blank" rel="noopener">Instagram @archie_sin</a></div>
+  <p style="font-size:.75rem;margin-top:16px">粉絲製作的非官方宣傳網站，並非藝人或主辦單位官方網站。</p>
+</footer>
+<script>
+const cards = document.querySelectorAll('.icon-card');
+const panels = document.querySelectorAll('.content-panel');
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    const target = card.dataset.panel;
+    cards.forEach(c => { c.classList.toggle('active', c === card); c.setAttribute('aria-expanded', String(c === card)); });
+    panels.forEach(panel => panel.classList.toggle('show', panel.id === target));
+    document.getElementById(target).scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+});
+</script>
+</body>
+</html>
